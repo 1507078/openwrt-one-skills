@@ -1,0 +1,15 @@
+# Board backups are large and contain per-unit calibration/MAC data.
+# Never commit them.
+backups/
+*.bin
+*.itb
+*.ubi
+*.fip
+raw/
+
+# Build output
+output/
+bin/
+dl/
+
+.DS_Store

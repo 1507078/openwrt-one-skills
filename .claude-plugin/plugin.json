@@ -1,0 +1,9 @@
+{
+  "name": "openwrt-one",
+  "description": "Bring up an OpenWrt One, turn it into your home router, and keep an eye on it. For developers who do not know networking.",
+  "version": "0.1.0",
+  "author": { "name": "maximilician" },
+  "homepage": "https://github.com/1507078/openwrt-one-skills",
+  "license": "MIT",
+  "keywords": ["openwrt", "router", "wifi", "networking", "embedded"]
+}

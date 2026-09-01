@@ -1,0 +1,51 @@
+# GitHub exposes only a rolling 14-day window of traffic data and keeps no
+# history. This job accumulates it, so that "did anyone actually want this?"
+# can be answered later with numbers instead of a guess.
+name: traffic
+
+on:
+  schedule:
+    # Daily. Well inside the 14-day window, so a few skipped runs cost nothing.
+    - cron: "17 1 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: traffic
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Check for the traffic token
+        # The built-in GITHUB_TOKEN cannot read the traffic endpoints -- they
+        # require push access, which it does not have (403, "Resource not
+        # accessible by integration"). A PAT is the only way in.
+        run: |
+          if [ -z "${{ secrets.TRAFFIC_TOKEN }}" ]; then
+            echo "::error::TRAFFIC_TOKEN secret is not set. See tracking/README.md."
+            exit 1
+          fi
+
+      - name: Fetch traffic
+        env:
+          GH_TOKEN: ${{ secrets.TRAFFIC_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: ./tracking/fetch-traffic.sh
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- tracking/traffic.csv; then
+            echo "no change"
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tracking/traffic.csv
+          git commit -m "chore(tracking): traffic snapshot $(date -u +%F)"
+          git push
