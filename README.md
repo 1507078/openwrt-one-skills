@@ -98,31 +98,22 @@ repo symlinks to `skills/`, so no install step is needed at all.
 `name` and `description` in the frontmatter. Point your agent at
 `skills/<name>/SKILL.md`.
 
-### Then just say what you want
+### First run
 
-The skills pick themselves up from what you ask. Nothing to invoke by name:
-
-> *"I just got an OpenWrt One, help me set it up"*
-> *"Make this the router for my house"*
-> *"Why is the Wi-Fi slow in the back bedroom?"*
-> *"Did that change actually take effect?"*
-
-### 🚨 First, close the front door
-
-**The board ships with root having no password at all.** `ssh root@192.168.1.1`
-lets you straight in — and it lets in anyone else on the same network. Fix that
-before anything else:
+The board ships with **root having no password**. `ssh root@192.168.1.1` lets
+you straight in — and so does anything else on that network. Close that before
+anything else, then install a key so the scripts never have to prompt:
 
 ```bash
-ssh root@192.168.1.1        # no password: this is the problem
-passwd                      # set one now
-exit
-ssh-copy-id root@192.168.1.1   # then use a key, so nothing prompts again
+ssh root@192.168.1.1 passwd     # the security fix
+ssh-copy-id root@192.168.1.1    # so nothing asks you again
 ```
 
-Setting a password is the security fix. Copying a key is what keeps the scripts
-working afterwards — they do not prompt, because an agent cannot answer a
-prompt.
+Then just say what you want. The skills pick themselves up from the question:
+
+> *"I just got an OpenWrt One, help me set it up"*
+> *"Why is the Wi-Fi slow in the back bedroom?"*
+> *"Did that change actually take effect?"*
 
 ---
 
