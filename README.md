@@ -139,6 +139,15 @@ prompt.
 
 ---
 
+## Where this came from
+
+These skills are the residue of running one of these boards as a household's
+router for real. The series documenting that — why the wifi was slow, what was
+actually on the network, what broke — is indexed in [`POSTS.md`](POSTS.md).
+Written in Traditional Chinese.
+
+---
+
 ## Status
 
 All three skills are usable; [`advanced/`](advanced/) is still an outline.
