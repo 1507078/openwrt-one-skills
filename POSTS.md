@@ -8,7 +8,7 @@ Links are filled in as each one is published.
 
 | | Title | Link |
 |---|---|---|
-| 1 | 網路慢，是訊號還是流量？ | — |
+| 1 | 網路都是通的，但就是很慢 | [Threads](https://www.threads.com/share/CJ2CPJWjKi/) |
 | 2 | 我懷疑家裡被偷連 | — |
 | 3 | 一台裝置有幾個身分？ | — |
 | 4 | 儀表板：我家頻寬夠不夠用？ | — |
